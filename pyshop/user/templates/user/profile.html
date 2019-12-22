@@ -1,0 +1,25 @@
+{% extends 'page/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="col-md-610 offset-md-1">
+        <h1 class="text-center my-5 text-info">User Profile Page</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h1>{{user.username}}</h1>
+                <h1>{{user.email}}</h1>
+                <img src="{{user.profile.image.url}}" alt="" style="width:150px;height:100px;">
+            </div>
+            <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ u_form|crispy}}
+                    {{ p_form|crispy }}
+                    <button type="submit" class="btn btn-primary btn-sm float-right">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

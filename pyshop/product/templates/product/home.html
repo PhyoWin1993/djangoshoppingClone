@@ -1,0 +1,37 @@
+{% extends 'page/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center text-info my-5">Product Home Page</h1>
+    <a href="{% url 'product-create-page' %}" class="btn btn-primary btn-sm">Create</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="bg-dark text-white">
+                <th scope="col">1</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">Dis</th>
+                <th scope="col">Creator</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+                <td><img src="{{product.image.url}}"/ style="width:150px;height:100px;"></td>
+                <td>{{product.dis}}</td>
+                <td>{{product.creator.username}}</td>
+                <td>
+                    <a href="{% url 'product-edit-page' product.id %}"  class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'product-delete-page' product.name %}"  class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
